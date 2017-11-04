@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.dtstack.jlogstash.inputs;
+package com.tansun.jlogstash.inputs;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -35,26 +35,27 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
+import org.apache.commons.lang3.StringUtils;
 import org.codehaus.plexus.util.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
 
-import com.dtstack.jlogstash.annotation.Required;
-import com.dtstack.jlogstash.decoder.IDecode;
-import com.dtstack.jlogstash.decoder.JsonDecoder;
-import com.dtstack.jlogstash.decoder.MultilineDecoder;
-import com.dtstack.jlogstash.decoder.PlainDecoder;
+import com.tansun.jlogstash.annotation.Required;
+import com.tansun.jlogstash.decoder.IDecode;
+import com.tansun.jlogstash.decoder.JsonDecoder;
+import com.tansun.jlogstash.decoder.MultilineDecoder;
+import com.tansun.jlogstash.decoder.PlainDecoder;
 import com.google.common.collect.Lists;
 
 /**
  * Reason: jlogstash 文件类型的读入插件
  * Date: 2016年11月19日
- * Company: www.dtstack.com
+ * Company: www.tansun.com
  * @author xuchao
  *
  */
-public class File extends BaseInput{
+public class File extends BaseInput {
 	
 	private static final long serialVersionUID = -1822028651072758886L;
 
@@ -107,6 +108,11 @@ public class File extends BaseInput{
 	private ScheduledExecutorService scheduleExecutor;
 	
 	private ReentrantLock writeFileLock = new ReentrantLock();
+
+	/**
+	 * 标记文件的类型，用于filter和output判断
+	 */
+	private String type;
 
 	public File(Map config) {
 		super(config);
@@ -451,7 +457,7 @@ public class File extends BaseInput{
 		executor.submit(new MonitorChangeRunnable());
 		executor.submit(new MonitorNewFileRunnable());
 		for(int i=0; i<readFileThreadNum; i++){
-			executor.submit(new FileRunnable(i));
+			executor.submit(new FileRunnable(i,this.type));
 		}
 		
 		scheduleExecutor.scheduleWithFixedDelay(new DumpSinceDbRunnable(), 
@@ -481,9 +487,12 @@ public class File extends BaseInput{
 	class FileRunnable implements Runnable{
 								
 		private final int index;
+
+		private final String tmpType;
 		
-		public FileRunnable(int index) {
+		public FileRunnable(int index, String tmpType) {
 			this.index = index;
+			this.tmpType = tmpType;
 		}
 
 		public void run() {
@@ -545,6 +554,10 @@ public class File extends BaseInput{
 							if (event != null && event.size() > 0){
 								event.put("path", readFileName);
 								event.put("offset", reader.getCurrBufPos());
+								//加入文件类型，用于filter 与 output
+								if(!StringUtils.isEmpty(tmpType)) {
+									event.put("type",tmpType);
+								}
 								process(event);
 							}
 						}

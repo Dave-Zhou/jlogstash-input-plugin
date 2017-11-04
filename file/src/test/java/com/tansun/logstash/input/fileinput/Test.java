@@ -1,4 +1,4 @@
-package com.dtstack.logstash.input.fileinput;
+package com.tansun.logstash.input.fileinput;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.dtstack.jlogstash.inputs.File;
-import com.dtstack.jlogstash.inputs.ReadLineUtil;
+import com.tansun.jlogstash.inputs.File;
+import com.tansun.jlogstash.inputs.ReadLineUtil;
 
 public class Test {
 	

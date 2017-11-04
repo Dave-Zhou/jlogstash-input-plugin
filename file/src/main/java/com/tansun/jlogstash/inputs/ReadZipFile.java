@@ -15,21 +15,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.dtstack.jlogstash.inputs;
+package com.tansun.jlogstash.inputs;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+import java.util.zip.ZipInputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.github.junrar.Archive;
-import com.github.junrar.rarfile.FileHeader;
-
 
 /**
  * 
@@ -38,74 +40,89 @@ import com.github.junrar.rarfile.FileHeader;
  * @author xuchao
  *
  */
-public class ReadRarFile implements IReader{
+public class ReadZipFile implements IReader{
 	
-	private static final Logger logger = LoggerFactory.getLogger(ReadRarFile.class);
+	private static final Logger logger = LoggerFactory.getLogger(ReadZipFile.class);
 	
-	private ConcurrentHashMap<String, Long> fileCurrPos  = new ConcurrentHashMap<String, Long>();
+	private ZipInputStream zipIn;
 	
-	private Archive archive;
-		
+	private ZipFile zfile;
+	
 	private BufferedReader currBuff;
 	
 	private InputStream currIns;
 	
-	private String currFileName;
-	
 	private long currFileSize = 0;
 	
-	public boolean readEnd = false;
-	
-	private String rarFileName = "";
+	private String currFileName = null;
 	
 	private String encoding = "UTF-8"; 
 	
-	public static ReadRarFile createInstance(String fileName, String encoding, ConcurrentHashMap<String, Long> fileCurrPos){
-		ReadRarFile readRarFile = new ReadRarFile(fileName, encoding, fileCurrPos);
-		if(readRarFile.init()){
-			return readRarFile;
+	private ConcurrentHashMap<String, Long> fileCurrPos; 
+	
+	private String zipFileName;
+	
+	public boolean readEnd = false;
+	
+	public static ReadZipFile createInstance(String fileName, String encoding, ConcurrentHashMap<String, Long> fileCurrPos){
+		ReadZipFile readZip = new ReadZipFile(fileName, encoding, fileCurrPos);
+		if(readZip.init()){
+			return readZip;
 		}
 		
 		return null;
 	}
-		
-	private ReadRarFile(String fileName, String encoding, ConcurrentHashMap<String, Long> fileCurrPos){
+	
+	private ReadZipFile(String fileName, String encoding, ConcurrentHashMap<String, Long> fileCurrPos){
 		this.fileCurrPos = fileCurrPos;
-		this.rarFileName = fileName;
+		this.zipFileName = fileName;
 		this.encoding = encoding;
 	}
 	
-	public long getRarSkipNum(String assignName){
-		Long skipNum = fileCurrPos.get(assignName);
-		skipNum = skipNum == null ? 0 : skipNum;
-		return skipNum;
-	}
-	
 	private boolean init(){
-		if (!rarFileName.toLowerCase().endsWith(".rar")) {
-			logger.error("not rar file, fileName:{}!", rarFileName);
+		if (!zipFileName.toLowerCase().endsWith(".zip")) {
+			logger.error("file:{} not zip file", zipFileName);
 			return false;
 		}
 
+		File file = new File(zipFileName);
+
 		try {
-			archive = new Archive(new File(rarFileName));
-		} catch(Exception e){
+			zipIn = new ZipInputStream(new FileInputStream(file));
+		} catch (FileNotFoundException e) {
 			logger.error("", e);
 			return false;
 		}
-		getNextBuffer();
+
+		zfile = null;
+
+		try {
+			zfile = new ZipFile(zipFileName);
+			getNextBuffer();
+		} catch (Exception e) {
+			logger.error("", e);
+			return false;
+		}
 		
 		return true;
 	}
 	
+	private long getSkipNum(String identify){
+		Long skipNum = fileCurrPos.get(identify);
+		skipNum = skipNum == null ? 0 : skipNum;
+		return skipNum;
+	}
+	
 	private String getIdentify(String fileName){
-		return  rarFileName + "|" + fileName; 
+		return zipFileName + "|" + fileName; 
 	}
 	
 	public BufferedReader getNextBuffer(){
 		
+		ZipEntry zipEn = null;
 		if(currBuff != null){
 			try {
+				zipIn.closeEntry();
 				currBuff.close();
 			} catch (IOException e) {
 				logger.error("", e);
@@ -120,58 +137,57 @@ public class ReadRarFile implements IReader{
 				logger.error("", e);
 			}
 			currIns = null;
+			
 			flushPos();
 		}
-		
-		currFileSize = 0;
 		currFileName = null;
+		currFileSize = 0;
 		
-		FileHeader fh = archive.nextFileHeader();
-		while (fh != null) {
-			if (!fh.isDirectory()) {// 文件夹
-
-				try {//之所以这么写try，是因为万一这里面有了异常，不影响继续解压.
-
-					InputStream ins = archive.getInputStream(fh);
-					currFileName = fh.getFileNameString();
-					String identify = getIdentify(currFileName);
-					long skipNum = getRarSkipNum(identify);
-					currFileSize = fh.getDataSize();
-					
-					if(currFileSize <= skipNum){
-						fh = archive.nextFileHeader();
-						continue;
+		try {
+			while ((zipEn = zipIn.getNextEntry()) != null) {
+				if (!zipEn.isDirectory()) {					
+					currIns = zfile.getInputStream(zipEn);
+					String fileName = zipEn.getName();
+					Long skipNum =  getSkipNum(getIdentify(fileName));
+					if(skipNum >= zipEn.getSize()){
+						zipIn.closeEntry();
+						continue;//跳过
 					}
 					
-					ins.skip(skipNum);
-					currBuff = new BufferedReader(new InputStreamReader(ins, encoding));
+					currFileSize = (int) zipEn.getSize();
+					currFileName = fileName;
+					currIns.skip(skipNum);
+					currBuff = new BufferedReader(new InputStreamReader(currIns, encoding));
 					break;
-				} catch (Exception e) {
-					logger.error("", e);
 				}
-
 			}
-			fh = archive.nextFileHeader();
+		} catch (Exception e) {
+			logger.error("", e);
 		}
 		
 		if(currBuff == null){//释放资源
 			try {
 				doAfterReaderOver();
+				logger.warn("release file resourse..");
 			} catch (IOException e) {
 				logger.error("", e);
-			}
+			};
 		}
 		
 		return currBuff;
 	}
 	
-
+	/**
+	 * 清理之前记录的zip文件里的文件信息eg: e:\\d\xx.zip|mydata/aa.log
+	 * @throws IOException 
+	 */
 	public void doAfterReaderOver() throws IOException{
 		
-		archive.close();
+		zipIn.closeEntry();
+		zfile.close();
 		
 		Iterator<Entry<String, Long>> it = fileCurrPos.entrySet().iterator();
-		String preFix = rarFileName + "|";
+		String preFix = zipFileName + "|";
 		while(it.hasNext()){
 			Entry<String, Long> entry = it.next();
 			if(entry.getKey().startsWith(preFix)){
@@ -180,13 +196,12 @@ public class ReadRarFile implements IReader{
 		}
 		
 		//重新插入一条表示zip包读取完成的信息
-		fileCurrPos.put(rarFileName, -1l);
+		fileCurrPos.put(zipFileName, -1l);
 		readEnd = true;
 	}
-
-
-	@Override
-	public String readLine() throws IOException {
+		
+	public String readLine() throws IOException{
+		
 		if(currBuff == null){
 			return null;
 		}
@@ -204,9 +219,9 @@ public class ReadRarFile implements IReader{
 	@Override
 	public String getFileName() {
 		if(currFileName == null){
-			return rarFileName;
+			return zipFileName;
 		}
-		return currFileName;
+		return getIdentify(currFileName);
 	}
 
 	@Override
@@ -231,15 +246,17 @@ public class ReadRarFile implements IReader{
 	 * 每个子文件写完的时候都更新一次
 	 */
 	public void flushPos(){
+		
 		if(currFileName == null){
 			logger.error("invalid state, may have set currFileName null at not right place.");
 			return;
 		}
+		
 		fileCurrPos.put(getIdentify(currFileName), currFileSize);
 	}
 	
 	@Override
 	public boolean needMonitorChg() {
 		return false;
-	}	
+	}
 }
