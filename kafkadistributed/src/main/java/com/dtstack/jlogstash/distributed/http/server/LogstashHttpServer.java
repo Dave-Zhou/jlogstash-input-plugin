@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.dtstack.jlogstash.distributed.http.server;
+package com.tansun.jlogstash.distributed.http.server;
 
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
@@ -23,9 +23,9 @@ import java.net.InetSocketAddress;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.dtstack.jlogstash.distributed.ZkDistributed;
-import com.dtstack.jlogstash.distributed.http.common.HttpCommon;
-import com.dtstack.jlogstash.distributed.http.common.Urls;
+import com.tansun.jlogstash.distributed.ZkDistributed;
+import com.tansun.jlogstash.distributed.http.common.HttpCommon;
+import com.tansun.jlogstash.distributed.http.common.Urls;
 import com.sun.net.httpserver.HttpServer;
 
 /**

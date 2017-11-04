@@ -1,4 +1,4 @@
-package com.dtstack.jlogstash.distributed.util;
+package com.tansun.jlogstash.distributed.util;
 
 public class CountUtil {
 	

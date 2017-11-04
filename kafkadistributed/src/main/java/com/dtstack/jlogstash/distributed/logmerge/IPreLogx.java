@@ -15,9 +15,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.dtstack.jlogstash.distributed.logmerge;
+package com.tansun.jlogstash.distributed.logmerge;
 
-import com.dtstack.jlogstash.exception.ExceptionUtil;
+import com.tansun.jlogstash.exception.ExceptionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.List;

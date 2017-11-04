@@ -15,13 +15,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.dtstack.jlogstash.distributed.util;
+package com.tansun.jlogstash.distributed.util;
 
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.dtstack.jlogstash.render.Formatter;
+import com.tansun.jlogstash.render.Formatter;
 
 
 /**

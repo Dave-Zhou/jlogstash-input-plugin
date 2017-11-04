@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.dtstack.jlogstash.distributed.netty.client;
+package com.tansun.jlogstash.distributed.netty.client;
 
 import java.net.InetSocketAddress;
 import java.util.Map;
@@ -42,7 +42,7 @@ import org.jboss.netty.util.TimerTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.dtstack.jlogstash.exception.ExceptionUtil;
+import com.tansun.jlogstash.exception.ExceptionUtil;
 
 /**
  * 

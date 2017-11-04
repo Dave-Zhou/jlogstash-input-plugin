@@ -1,4 +1,4 @@
-package com.dtstack.jlogstash.inputs;
+package com.tansun.jlogstash.inputs;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;

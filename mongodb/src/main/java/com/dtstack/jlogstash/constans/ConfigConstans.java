@@ -1,4 +1,4 @@
-package com.dtstack.jlogstash.constans;
+package com.tansun.jlogstash.constans;
 
 /**
  * @author zxb

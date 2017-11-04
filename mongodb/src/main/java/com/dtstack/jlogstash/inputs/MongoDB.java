@@ -1,7 +1,7 @@
-package com.dtstack.jlogstash.inputs;
+package com.tansun.jlogstash.inputs;
 
-import com.dtstack.jlogstash.annotation.Required;
-import com.dtstack.jlogstash.exception.ExceptionUtil;
+import com.tansun.jlogstash.annotation.Required;
+import com.tansun.jlogstash.exception.ExceptionUtil;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;

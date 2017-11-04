@@ -1,4 +1,4 @@
-package com.dtstack.jlogstash.inputs;
+package com.tansun.jlogstash.inputs;
 
 /**
  * 简单调度器，按频率调度

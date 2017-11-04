@@ -1,4 +1,4 @@
-package com.dtstack.jlogstash.inputs;
+package com.tansun.jlogstash.inputs;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
@@ -24,7 +24,7 @@ import io.netty.util.concurrent.Future;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.dtstack.jlogstash.inputs.Beats.MessageListener;
+import com.tansun.jlogstash.inputs.Beats.MessageListener;
 
 import javax.net.ssl.SSLException;
 

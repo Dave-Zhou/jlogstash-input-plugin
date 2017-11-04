@@ -1,4 +1,4 @@
-package com.dtstack.jlogstash.inputs;
+package com.tansun.jlogstash.inputs;
 
 /**
  * 任务接口

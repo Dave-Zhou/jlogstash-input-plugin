@@ -1,7 +1,7 @@
-package com.dtstack.jlogstash.inputs;
+package com.tansun.jlogstash.inputs;
 
-import com.dtstack.jlogstash.annotation.Required;
-import com.dtstack.jlogstash.exception.InitializeException;
+import com.tansun.jlogstash.annotation.Required;
+import com.tansun.jlogstash.exception.InitializeException;
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;

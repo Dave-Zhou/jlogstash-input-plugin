@@ -1,4 +1,4 @@
-package com.dtstack.jlogstash;
+package com.tansun.jlogstash;
 
 import redis.clients.jedis.JedisPubSub;
 

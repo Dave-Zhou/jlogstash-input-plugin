@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.dtstack.jlogstash.inputs;
+package com.tansun.jlogstash.inputs;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -30,8 +30,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.dtstack.jlogstash.annotation.Required;
-import com.dtstack.jlogstash.decoder.IDecode;
+import com.tansun.jlogstash.annotation.Required;
+import com.tansun.jlogstash.decoder.IDecode;
 import kafka.consumer.ConsumerConfig;
 import kafka.consumer.ConsumerIterator;
 import kafka.consumer.KafkaStream;

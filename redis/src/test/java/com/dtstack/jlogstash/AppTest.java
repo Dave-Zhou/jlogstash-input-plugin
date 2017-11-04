@@ -1,7 +1,7 @@
-package com.dtstack.jlogstash;
+package com.tansun.jlogstash;
 
-import com.dtstack.jlogstash.inputs.ChannelListener;
-import com.dtstack.jlogstash.utils.JedisPoolUtils;
+import com.tansun.jlogstash.inputs.ChannelListener;
+import com.tansun.jlogstash.utils.JedisPoolUtils;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

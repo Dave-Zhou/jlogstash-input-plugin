@@ -1,6 +1,6 @@
-package com.dtstack.jlogstash.inputs;
+package com.tansun.jlogstash.inputs;
 
-import com.dtstack.jlogstash.constans.ConfigConstans;
+import com.tansun.jlogstash.constans.ConfigConstans;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.yaml.snakeyaml.Yaml;

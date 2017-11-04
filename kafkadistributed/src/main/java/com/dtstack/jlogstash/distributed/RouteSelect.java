@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.dtstack.jlogstash.distributed;
+package com.tansun.jlogstash.distributed;
 
 import java.util.List;
 import java.util.Map;
@@ -26,9 +26,9 @@ import com.google.common.collect.Lists;
 import com.netflix.curator.framework.recipes.locks.InterProcessMutex;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.dtstack.jlogstash.distributed.netty.client.NettySend;
-import com.dtstack.jlogstash.distributed.util.RouteUtil;
-import com.dtstack.jlogstash.exception.ExceptionUtil;
+import com.tansun.jlogstash.distributed.netty.client.NettySend;
+import com.tansun.jlogstash.distributed.util.RouteUtil;
+import com.tansun.jlogstash.exception.ExceptionUtil;
 import com.google.common.collect.Maps;
 
 

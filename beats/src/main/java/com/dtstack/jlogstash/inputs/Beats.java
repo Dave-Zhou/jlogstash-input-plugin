@@ -15,15 +15,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.dtstack.jlogstash.inputs;
+package com.tansun.jlogstash.inputs;
 
 import io.netty.channel.ChannelHandlerContext;
 import java.io.FileInputStream;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.dtstack.jlogstash.annotation.Required;
-import com.dtstack.jlogstash.inputs.BaseInput;
+import com.tansun.jlogstash.annotation.Required;
+import com.tansun.jlogstash.inputs.BaseInput;
 
 
 /**

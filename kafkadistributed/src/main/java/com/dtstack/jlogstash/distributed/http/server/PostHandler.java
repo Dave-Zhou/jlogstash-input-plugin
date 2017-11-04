@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.dtstack.jlogstash.distributed.http.server;
+package com.tansun.jlogstash.distributed.http.server;
 
 
 import java.io.ByteArrayOutputStream;

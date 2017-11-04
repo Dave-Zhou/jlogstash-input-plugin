@@ -15,9 +15,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.dtstack.jlogstash.distributed.logmerge;
+package com.tansun.jlogstash.distributed.logmerge;
 
-import com.dtstack.jlogstash.distributed.util.RouteUtil;
+import com.tansun.jlogstash.distributed.util.RouteUtil;
 import com.google.common.collect.Maps;
 
 import org.codehaus.jackson.map.ObjectMapper;

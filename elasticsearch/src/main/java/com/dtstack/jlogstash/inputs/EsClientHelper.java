@@ -1,4 +1,4 @@
-package com.dtstack.jlogstash.inputs;
+package com.tansun.jlogstash.inputs;
 
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.client.Client;

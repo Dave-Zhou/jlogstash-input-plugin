@@ -15,9 +15,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.dtstack.jlogstash.distributed.netty.server;
+package com.tansun.jlogstash.distributed.netty.server;
 
-import com.dtstack.jlogstash.distributed.logmerge.LogPool;
+import com.tansun.jlogstash.distributed.logmerge.LogPool;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jboss.netty.bootstrap.ServerBootstrap;

@@ -2,46 +2,30 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.dtstack.jlogstash</groupId>
+	<groupId>com.tansun.jlogstash</groupId>
 	<artifactId>input.tcp</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 	<name>tcp</name>
 	<description>input plugin tcp</description>
-	<url>https://github.com/DTStack/jlogstash-input-plugin/tree/master/tcp</url>
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-
-	<licenses>
-		<license>
-			<name>The Apache Software License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
-
-	<scm>
-		<url>https://github.com/DTStack/jlogstash-input-plugin</url>
-		<connection>git@github.com:DTStack/jlogstash-input-plugin.git</connection>
-		<developerConnection>scm:git:https://github.com/DTStack/jlogstash-input-plugin.git</developerConnection>
-	</scm>
-
-	<developers>
-		<developer>
-			<id>whiletrue</id>
-			<name>杨思枢</name>
-			<email>sishu.yss@dtstack.com</email>
-			<organization>dtstack</organization>
-			<organizationUrl>http://www.dtstack.com</organizationUrl>
-			<roles>
-				<role>Project-Administrator</role>
-				<role>Developer</role>
-			</roles>
-			<timezone>+1</timezone>
-		</developer>
-	</developers>
+	<!--maven仓库地址 -->
+	<repositories>
+		<repository>
+			<id>public</id>
+			<name>Public Repositories</name>
+			<url>http://60.207.126.242:10009/nexus/content/groups/public/</url>
+		</repository>
+	</repositories>
+	<!--发布jar包的仓库地址 -->
+	<distributionManagement>
+		<repository>
+			<id>releases</id>
+			<url>http://60.207.126.242:10009/nexus/content/repositories/releases/</url>
+		</repository>
+	</distributionManagement>
 	<build>
 		<resources>
 			<resource>
@@ -69,6 +53,15 @@
 					</execution>
 				</executions>
 			</plugin>
+			<!-- 跳过test 编译 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.20.1</version>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -82,6 +75,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.4</version>
 				<executions>
 					<execution>
 						<id>attach-javadocs</id>
@@ -95,6 +89,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
+				<version>3.0.1</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -105,30 +100,8 @@
 				</executions>
 			</plugin>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-gpg-plugin</artifactId>
-				<version>1.6</version>
-				<executions>
-					<execution>
-						<id>sign-artifacts</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>sign</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
 		</plugins>
 	</build>
-	<distributionManagement>
-		<repository>
-			<id>oss</id>
-			<name>Proficio Repository</name>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
-		</repository>
-	</distributionManagement>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.mina</groupId>
@@ -143,7 +116,7 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.dtstack.jlogstash</groupId>
+			<groupId>com.tansun.jlogstash</groupId>
 			<artifactId>jlogstash</artifactId>
 			<version>1.0.0</version>
 			<scope>provided</scope>

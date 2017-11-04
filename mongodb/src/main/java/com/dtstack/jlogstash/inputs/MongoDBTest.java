@@ -1,9 +1,9 @@
-package com.dtstack.jlogstash.inputs;
+package com.tansun.jlogstash.inputs;
 
-import com.dtstack.jlogstash.annotation.Required;
-import com.dtstack.jlogstash.date.DateParser;
-import com.dtstack.jlogstash.date.FormatParser;
-import com.dtstack.jlogstash.exception.ExceptionUtil;
+import com.tansun.jlogstash.annotation.Required;
+import com.tansun.jlogstash.date.DateParser;
+import com.tansun.jlogstash.date.FormatParser;
+import com.tansun.jlogstash.exception.ExceptionUtil;
 import com.mongodb.Block;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;

@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.dtstack.jlogstash.inputs;
+package com.tansun.jlogstash.inputs;
 
 import java.io.File;
 import java.net.InetAddress;
@@ -39,7 +39,7 @@ import org.apache.mina.filter.ssl.SslFilter;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.dtstack.jlogstash.annotation.Required;
+import com.tansun.jlogstash.annotation.Required;
 
 /**
  * 

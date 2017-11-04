@@ -1,4 +1,4 @@
-package com.dtstack.jlogstash.utils;
+package com.tansun.jlogstash.utils;
 
 public enum DataType {
     LIST("list")

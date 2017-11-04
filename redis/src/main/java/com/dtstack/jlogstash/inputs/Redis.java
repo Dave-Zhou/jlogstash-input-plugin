@@ -1,8 +1,8 @@
-package com.dtstack.jlogstash.inputs;
+package com.tansun.jlogstash.inputs;
 
-import com.dtstack.jlogstash.annotation.Required;
-import com.dtstack.jlogstash.utils.DataType;
-import com.dtstack.jlogstash.utils.JedisPoolUtils;
+import com.tansun.jlogstash.annotation.Required;
+import com.tansun.jlogstash.utils.DataType;
+import com.tansun.jlogstash.utils.JedisPoolUtils;
 import redis.clients.jedis.Jedis;
 
 import java.util.*;

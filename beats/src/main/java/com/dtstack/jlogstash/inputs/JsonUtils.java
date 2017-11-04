@@ -1,4 +1,4 @@
-package com.dtstack.jlogstash.inputs;
+package com.tansun.jlogstash.inputs;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 //import com.fasterxml.jackson.module.afterburner.AfterburnerModule;

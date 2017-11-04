@@ -1,4 +1,4 @@
-package com.dtstack.jlogstash.jdistributed.gclog;
+package com.tansun.jlogstash.jdistributed.gclog;
 
 /**
  * Reason:

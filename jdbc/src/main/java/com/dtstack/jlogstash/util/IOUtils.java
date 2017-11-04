@@ -1,4 +1,4 @@
-package com.dtstack.jlogstash.util;
+package com.tansun.jlogstash.util;
 
 import java.io.Closeable;
 import java.io.IOException;

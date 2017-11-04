@@ -1,4 +1,4 @@
-package com.dtstack.jlogstash.utils;
+package com.tansun.jlogstash.utils;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;

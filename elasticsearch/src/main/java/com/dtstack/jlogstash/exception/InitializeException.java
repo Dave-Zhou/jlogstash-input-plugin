@@ -1,4 +1,4 @@
-package com.dtstack.jlogstash.exception;
+package com.tansun.jlogstash.exception;
 
 /**
  * @author zxb

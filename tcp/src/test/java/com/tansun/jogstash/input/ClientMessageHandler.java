@@ -1,4 +1,4 @@
-package com.dtstack.jogstash.input;
+package com.tansun.jogstash.input;
 
 import org.apache.log4j.Logger;    
 import org.apache.mina.core.service.IoHandlerAdapter;    

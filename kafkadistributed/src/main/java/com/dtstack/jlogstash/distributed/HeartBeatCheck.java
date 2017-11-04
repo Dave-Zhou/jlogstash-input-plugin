@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.dtstack.jlogstash.distributed;
+package com.tansun.jlogstash.distributed;
 
 import java.util.List;
 import java.util.Map;
@@ -23,8 +23,8 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.dtstack.jlogstash.distributed.util.CountUtil;
-import com.dtstack.jlogstash.exception.ExceptionUtil;
+import com.tansun.jlogstash.distributed.util.CountUtil;
+import com.tansun.jlogstash.exception.ExceptionUtil;
 import com.google.common.collect.Maps;
 
 /**

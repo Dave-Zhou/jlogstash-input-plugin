@@ -15,13 +15,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.dtstack.jlogstash.distributed.http.server.callback;
+package com.tansun.jlogstash.distributed.http.server.callback;
 
 import java.io.OutputStream;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.dtstack.jlogstash.exception.ExceptionUtil;
+import com.tansun.jlogstash.exception.ExceptionUtil;
 import com.sun.net.httpserver.HttpExchange;
 
 /**

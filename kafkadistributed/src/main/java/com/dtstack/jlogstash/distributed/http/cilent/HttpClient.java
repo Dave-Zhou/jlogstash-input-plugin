@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.dtstack.jlogstash.distributed.http.cilent;
+package com.tansun.jlogstash.distributed.http.cilent;
 
 import org.apache.commons.codec.Charsets;
 import org.apache.http.HttpEntity;
@@ -31,7 +31,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.dtstack.jlogstash.exception.ExceptionUtil;
+import com.tansun.jlogstash.exception.ExceptionUtil;
 
 import java.util.Map;
 

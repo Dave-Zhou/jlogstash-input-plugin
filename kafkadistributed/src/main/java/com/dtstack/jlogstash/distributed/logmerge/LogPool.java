@@ -15,10 +15,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.dtstack.jlogstash.distributed.logmerge;
+package com.tansun.jlogstash.distributed.logmerge;
 
-import com.dtstack.jlogstash.jdistributed.gclog.CMSPreLogInfo;
-import com.dtstack.jlogstash.exception.ExceptionUtil;
+import com.tansun.jlogstash.jdistributed.gclog.CMSPreLogInfo;
+import com.tansun.jlogstash.exception.ExceptionUtil;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 

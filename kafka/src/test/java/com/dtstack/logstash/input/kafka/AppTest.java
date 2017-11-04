@@ -1,4 +1,4 @@
-package com.dtstack.logstash.input.kafka;
+package com.tansun.logstash.input.kafka;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
