@@ -100,6 +100,8 @@
 
  readFileThreadNum:文件读取的线程数,默认是:cpu处理器数+1
  
+ type: 标记文件类型
+ 
  # Redis:
  host:redis服务主机地址
  
